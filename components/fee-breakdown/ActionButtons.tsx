@@ -21,14 +21,14 @@ export default function ActionButtons({
   onUpdate 
 }: ActionButtonsProps) {
   return (
-    <div className='flex justify-end mt-6 gap-4'>
-      <Button onClick={onReset} variant='outline' disabled={isSaving}>
+    <div className='flex flex-col sm:flex-row sm:justify-end mt-6 gap-3'>
+      <Button onClick={onReset} variant='outline' disabled={isSaving} className='w-full sm:w-auto'>
         Reset Form
       </Button>
       {isEditMode ? (
         <Button
           onClick={onUpdate}
-          className='bg-green-600 hover:bg-green-700 text-white'
+          className='bg-green-600 hover:bg-green-700 text-white w-full sm:w-auto'
           disabled={isSaving}
         >
           <Save className='w-4 h-4 mr-2' />
@@ -37,7 +37,7 @@ export default function ActionButtons({
       ) : (
         <Button
           onClick={onGenerate}
-          className='bg-green-600 hover:bg-green-700 text-white'
+          className='bg-green-600 hover:bg-green-700 text-white w-full sm:w-auto'
           disabled={isSaving}
         >
           {isSaving ? 'Saving to Supabase...' : 'Generate Receipt'}

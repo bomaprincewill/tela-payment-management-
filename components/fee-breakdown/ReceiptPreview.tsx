@@ -56,7 +56,7 @@ export default function ReceiptPreview({
                 <Image
                   src={Logo}
                   alt='Tela'
-                  className='w-[10%] h-[30%]'
+                  className='w-16 h-auto'
                   placeholder='blur'
                 />
               </div>
@@ -72,7 +72,7 @@ export default function ReceiptPreview({
             </div>
 
             {/* Receipt Title */}
-            <div className='flex justify-between items-center mb-6'>
+            <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-6'>
               <h2 className='text-xl font-bold text-gray-800'>
                 OFFICIAL RECEIPT
               </h2>
@@ -92,7 +92,7 @@ export default function ReceiptPreview({
             </div>
 
             {/* Student Details Grid */}
-            <div className='grid grid-cols-2 gap-4 mb-6 p-4 bg-gray-50 rounded-lg'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 p-4 bg-gray-50 rounded-lg'>
               <div>
                 <p className='text-xs text-gray-500 uppercase'>Student Name</p>
                 <p className='font-semibold'>{formData.studentName || ''}</p>
@@ -109,7 +109,7 @@ export default function ReceiptPreview({
                 <p className='text-xs text-gray-500 uppercase'>Term</p>
                 <p className='font-semibold'>{formData.term || ''}</p>
               </div>
-              <div className='col-span-2'>
+              <div className='sm:col-span-2'>
                 <p className='text-xs text-gray-500 uppercase'>Parent/Guardian</p>
                 <p className='font-semibold'>{formData.parentName || ''}</p>
               </div>
@@ -118,7 +118,8 @@ export default function ReceiptPreview({
             {/* Payment Details Table */}
             <div className='mb-6'>
               <h3 className='font-semibold mb-2 text-gray-700'>Payment Details:</h3>
-              <table className='w-full border-collapse'>
+              <div className='overflow-x-auto'>
+              <table className='w-full border-collapse min-w-[520px]'>
                 <thead>
                   <tr className='bg-gray-100'>
                     <th className='text-left p-2 border'>Description</th>
@@ -143,13 +144,15 @@ export default function ReceiptPreview({
                   </tr>
                 </tbody>
               </table>
+              </div>
             </div>
 
             {/* Balance Payments Section in Receipt */}
             {balancePayments.length > 0 && (
               <div className='mb-6'>
                 <h3 className='font-semibold mb-2 text-gray-700'>Balance Payments (Separate):</h3>
-                <table className='w-full border-collapse'>
+                <div className='overflow-x-auto'>
+                <table className='w-full border-collapse min-w-[520px]'>
                   <thead>
                     <tr className='bg-gray-100'>
                       <th className='text-left p-2 border'>Description</th>
@@ -174,6 +177,7 @@ export default function ReceiptPreview({
                     </tr>
                   </tbody>
                 </table>
+                </div>
               </div>
             )}
 
@@ -190,7 +194,7 @@ export default function ReceiptPreview({
         </div>
 
         {/* Download Options */}
-        <div className='mt-6 flex justify-end gap-4 print:hidden'>
+        <div className='mt-6 flex flex-col sm:flex-row sm:justify-end gap-3 print:hidden'>
           <div className='flex items-center gap-2'>
             <label htmlFor='format' className='text-sm font-medium'>Download as:</label>
             <select
@@ -206,7 +210,7 @@ export default function ReceiptPreview({
           </div>
           <Button
             onClick={onDownload}
-            className='bg-green-600 hover:bg-green-700'
+            className='bg-green-600 hover:bg-green-700 w-full sm:w-auto'
             disabled={isSaving}
           >
             <Download className='w-4 h-4 mr-2' />
@@ -215,6 +219,7 @@ export default function ReceiptPreview({
           <Button 
             onClick={onClosePreview} 
             variant='outline'
+            className='w-full sm:w-auto'
             disabled={isSaving}
           >
             Close Preview

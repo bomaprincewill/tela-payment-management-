@@ -217,7 +217,7 @@ function FeeBreakdownContent() {
 
       {/* Edit Mode Indicator */}
       {isEditMode && (
-        <div className='bg-green-50 border border-green-200 rounded-lg p-3 flex items-center justify-between'>
+        <div className='bg-green-50 border border-green-200 rounded-lg p-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
           <div className='flex items-center gap-2'>
             <Edit className='w-5 h-5 text-green-600' />
             <span className='text-sm font-medium text-green-700'>
@@ -228,7 +228,7 @@ function FeeBreakdownContent() {
             size='sm'
             variant='outline'
             onClick={cancelEdit}
-            className='text-gray-600'
+            className='text-gray-600 w-full sm:w-auto'
           >
             <X className='w-4 h-4 mr-1' />
             Cancel Edit

@@ -65,12 +65,12 @@ export default function ReceiptModal({
               {/* School Header */}
               <div className='text-center mb-6 border-b pb-4'>
                 <div className='flex justify-center mb-1'>
-                  <Image
-                    src={Logo}
-                    alt='Tela'
-                    className='w-[10%] h-[30%]'
-                    placeholder='blur'
-                  />
+                <Image
+                  src={Logo}
+                  alt='Tela'
+                  className='w-16 h-auto'
+                  placeholder='blur'
+                />
                 </div>
                 <h1 className='text-2xl font-bold text-gray-800'>
                   Celias Schools International Schools
@@ -84,7 +84,7 @@ export default function ReceiptModal({
               </div>
 
               {/* Receipt Title */}
-              <div className='flex justify-between items-center mb-6'>
+              <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 mb-6'>
                 <h2 className='text-xl font-bold text-gray-800'>
                   OFFICIAL RECEIPT
                 </h2>
@@ -104,7 +104,7 @@ export default function ReceiptModal({
               </div>
 
               {/* Student Details Grid */}
-              <div className='grid grid-cols-2 gap-4 mb-6 p-4 bg-gray-50 rounded-lg'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 p-4 bg-gray-50 rounded-lg'>
                 <div>
                   <p className='text-xs text-gray-500 uppercase'>Receipt Number</p>
                   <p className='font-semibold'>{receipt.receipt_number}</p>
@@ -125,7 +125,7 @@ export default function ReceiptModal({
                   <p className='text-xs text-gray-500 uppercase'>Term</p>
                   <p className='font-semibold'>{receipt.term}</p>
                 </div>
-                <div className='col-span-2'>
+                <div className='sm:col-span-2'>
                   <p className='text-xs text-gray-500 uppercase'>Parent/Guardian</p>
                   <p className='font-semibold'>{receipt.parent_name}</p>
                 </div>
@@ -134,7 +134,8 @@ export default function ReceiptModal({
               {/* Payment Details Table */}
               <div className='mb-6'>
                 <h3 className='font-semibold mb-2 text-gray-700'>Payment Details:</h3>
-                <table className='w-full border-collapse'>
+                <div className='overflow-x-auto'>
+                <table className='w-full border-collapse min-w-[520px]'>
                   <thead>
                     <tr className='bg-gray-100'>
                       <th className='text-left p-2 border'>Description</th>
@@ -159,13 +160,15 @@ export default function ReceiptModal({
                     </tr>
                   </tbody>
                 </table>
+                </div>
               </div>
 
               {/* Balance Payments Section */}
               {receipt.balance_payments && receipt.balance_payments.length > 0 && (
                 <div className='mb-6'>
                   <h3 className='font-semibold mb-2 text-gray-700'>Balance Payments (Separate):</h3>
-                  <table className='w-full border-collapse'>
+                  <div className='overflow-x-auto'>
+                  <table className='w-full border-collapse min-w-[520px]'>
                     <thead>
                       <tr className='bg-gray-100'>
                         <th className='text-left p-2 border'>Description</th>
@@ -190,6 +193,7 @@ export default function ReceiptModal({
                       </tr>
                     </tbody>
                   </table>
+                  </div>
                 </div>
               )}
 
@@ -206,8 +210,8 @@ export default function ReceiptModal({
           </div>
 
           {/* Modal Footer */}
-          <div className='sticky bottom-0 bg-gray-50 border-t border-gray-200 px-6 py-4 rounded-b-lg flex justify-end gap-3'>
-            <div className='flex items-center gap-2 mr-auto'>
+          <div className='sticky bottom-0 bg-gray-50 border-t border-gray-200 px-4 sm:px-6 py-4 rounded-b-lg flex flex-col sm:flex-row sm:justify-end gap-3'>
+            <div className='flex items-center gap-2 sm:mr-auto'>
               <label htmlFor='modalFormat' className='text-sm font-medium text-gray-700'>
                 Download as:
               </label>
@@ -223,7 +227,7 @@ export default function ReceiptModal({
             </div>
             <Button
               onClick={onDownload}
-              className='bg-green-600 hover:bg-green-700'
+              className='bg-green-600 hover:bg-green-700 w-full sm:w-auto'
               disabled={isDownloading}
             >
               <Download className='w-4 h-4 mr-2' />
@@ -231,7 +235,7 @@ export default function ReceiptModal({
             </Button>
             <Button
               variant='outline'
-              className='text-green-600 border-green-200 hover:bg-green-50'
+              className='text-green-600 border-green-200 hover:bg-green-50 w-full sm:w-auto'
               onClick={() => {
                 onClose()
                 onEdit(receipt)
@@ -242,7 +246,7 @@ export default function ReceiptModal({
             </Button>
             <Button
               variant='outline'
-              className='text-green-600 border-green-200 hover:bg-green-50'
+              className='text-green-600 border-green-200 hover:bg-green-50 w-full sm:w-auto'
               onClick={() => {
                 onClose()
                 onDelete(receipt)
@@ -254,6 +258,7 @@ export default function ReceiptModal({
             <Button
               onClick={onClose}
               variant='outline'
+              className='w-full sm:w-auto'
             >
               Close
             </Button>

@@ -46,7 +46,7 @@ export default function BalancePaymentsSection({
   return (
     <Card className='border-2 border-green-200 bg-green-50/50'>
       <CardHeader>
-        <CardTitle className='text-lg font-bold flex items-center justify-between'>
+        <CardTitle className='text-lg font-bold flex flex-col md:flex-row md:items-center md:justify-between gap-3'>
           <div className='flex items-center gap-2'>
             <RotateCcw className='w-5 h-5 text-green-600' />
             Balance Payments
@@ -54,7 +54,7 @@ export default function BalancePaymentsSection({
               (Separate from grand total - for tracking only)
             </span>
           </div>
-          <div className='flex gap-2'>
+          <div className='flex flex-wrap gap-2'>
             <Button
               size='sm'
               variant='outline'

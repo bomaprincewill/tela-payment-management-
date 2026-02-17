@@ -392,25 +392,25 @@ export default function OutstandingBalances() {
   }
 
   return (
-    <div className='max-w-4xl mx-auto px-4 py-8'>
+    <div className='max-w-6xl mx-auto px-4 py-6 sm:py-8'>
       {/* Navigation Header */}
-      <div className='mb-6 flex items-center justify-between'>
-        <div className='flex items-center gap-4'>
+      <div className='mb-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3'>
+        <div className='flex flex-wrap items-center gap-3 sm:gap-4'>
           <Link href='/dashboard'>
-            <Button variant='outline' size='sm' className='flex items-center gap-2'>
+            <Button variant='outline' size='sm' className='flex items-center gap-2 w-full sm:w-auto'>
               <ArrowLeft className='w-4 h-4' />
               Back to Fee Breakdown
             </Button>
           </Link>
-          <div className='h-6 w-px bg-gray-300' />
+          <div className='hidden sm:block h-6 w-px bg-gray-300' />
           <div className='flex items-center gap-2'>
             
             <span className='text-sm text-gray-600'>Outstanding Balances</span>
           </div>
         </div>
-        <div className='flex items-center gap-2'>
+        <div className='flex flex-col sm:flex-row sm:items-center gap-2 w-full lg:w-auto'>
           <Link href='/dashboard'>
-            <Button size='sm' className='bg-green-600 hover:bg-green-700'>
+            <Button size='sm' className='bg-green-600 hover:bg-green-700 w-full sm:w-auto'>
               <Home className='w-4 h-4 mr-2' />
               Home
             </Button>
@@ -418,7 +418,7 @@ export default function OutstandingBalances() {
           <Button
             type='button'
             variant='outline'
-            className='border-green-200 text-green-700 hover:bg-green-50'
+            className='border-green-200 text-green-700 hover:bg-green-50 w-full sm:w-auto'
             onClick={handleLogout}
           >
             <LogOut className='w-4 h-4 mr-2' />
@@ -434,7 +434,7 @@ export default function OutstandingBalances() {
       </div>
 
       {/* Stats Cards */}
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mb-6'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6'>
         <Card className='bg-green-50 border-green-200'>
           <CardContent className='p-6'>
             <div className='flex items-center justify-between'>
@@ -474,7 +474,7 @@ export default function OutstandingBalances() {
       {/* Search and Filter Bar */}
       <Card className='mb-6'>
         <CardContent className='p-4'>
-          <div className='flex flex-col md:flex-row gap-4'>
+          <div className='flex flex-col lg:flex-row gap-4'>
             <div className='flex-1 relative'>
               <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
               <Input
@@ -485,11 +485,11 @@ export default function OutstandingBalances() {
                 className='pl-10'
               />
             </div>
-            <div className='flex gap-2'>
+            <div className='flex flex-wrap gap-2'>
               <select
                 value={filterGrade}
                 onChange={(e) => setFilterGrade(e.target.value)}
-                className='px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 min-w-[150px]'
+                className='px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 min-w-[150px] w-full sm:w-auto'
               >
                 <option value='all'>All Grades</option>
                 {gradeOptions.map(grade => (
@@ -500,14 +500,14 @@ export default function OutstandingBalances() {
                 onClick={fetchOutstandingBalances}
                 variant='outline'
                 disabled={refreshing}
-                className='whitespace-nowrap'
+                className='whitespace-nowrap w-full sm:w-auto'
               >
                 <RefreshCw className={`w-4 h-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
                 Refresh
               </Button>
               <Button
                 onClick={exportToCSV}
-                className='bg-green-600 hover:bg-green-700 text-white whitespace-nowrap'
+                className='bg-green-600 hover:bg-green-700 text-white whitespace-nowrap w-full sm:w-auto'
               >
                 <Download className='w-4 h-4 mr-2' />
                 Export CSV
@@ -551,8 +551,8 @@ export default function OutstandingBalances() {
                 className='bg-gradient-to-r from-gray-50 to-gray-100 p-4 cursor-pointer hover:from-gray-100 hover:to-gray-200 transition-all'
                 onClick={() => toggleGrade(grade)}
               >
-                <div className='flex items-center justify-between'>
-                  <div className='flex items-center gap-4'>
+                <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3'>
+                  <div className='flex items-start sm:items-center gap-4'>
                     <div className='bg-green-100 p-2 rounded-lg'>
                       <GraduationCap className='w-6 h-6 text-green-600' />
                     </div>
@@ -567,7 +567,7 @@ export default function OutstandingBalances() {
                       </div>
                     </div>
                   </div>
-                  <div className='flex items-center gap-4'>
+                  <div className='flex items-center justify-between lg:justify-start gap-4'>
                     <span className='text-sm font-medium text-green-600 bg-green-50 px-3 py-1 rounded-full'>
                       {stats.totalBalanceAmount > 0 
                         ? ((data.totalOutstanding / stats.totalBalanceAmount) * 100).toFixed(1) 
@@ -688,7 +688,7 @@ export default function OutstandingBalances() {
       {Object.keys(filteredStudents).length > 0 && (
         <Card className='mt-6 bg-gray-50'>
           <CardContent className='p-4'>
-            <div className='flex flex-col md:flex-row justify-between items-center gap-4'>
+            <div className='flex flex-col md:flex-row justify-between md:items-center gap-4'>
               <div className='text-sm text-gray-600'>
                 Showing {Object.values(filteredStudents).reduce((acc, data) => acc + data.students.length, 0)} students across {Object.keys(filteredStudents).length} grades
               </div>

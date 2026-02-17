@@ -71,7 +71,7 @@ export default function SearchSection({
           <Button
             onClick={onSearch}
             disabled={isSearching}
-            className='bg-green-600 hover:bg-green-700 min-w-[120px]'
+            className='bg-green-600 hover:bg-green-700 min-w-[120px] w-full md:w-auto'
           >
             {isSearching ? 'Searching...' : 'Search'}
           </Button>
@@ -120,7 +120,7 @@ export default function SearchSection({
                             </div>
                           </div>
                         </div>
-                        <div className='flex gap-2'>
+                        <div className='flex flex-wrap gap-2'>
                           <Button
                             variant='outline'
                             size='sm'
