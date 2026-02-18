@@ -434,7 +434,7 @@ export default function OutstandingBalances() {
       </div>
 
       {/* Stats Cards */}
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6'>
         <Card className='bg-green-50 border-green-200'>
           <CardContent className='p-6'>
             <div className='flex items-center justify-between'>
@@ -459,16 +459,6 @@ export default function OutstandingBalances() {
           </CardContent>
         </Card>
 
-        <Card className='bg-green-50 border-green-200'>
-          <CardContent className='p-6'>
-            <div className='flex items-center justify-between'>
-              <div>
-                <p className='text-sm font-medium text-green-600 mb-1'>Total Outstanding</p>
-                <p className='text-3xl font-bold text-green-700'>₦{stats.totalBalanceAmount.toLocaleString()}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
 
       {/* Search and Filter Bar */}
@@ -568,11 +558,6 @@ export default function OutstandingBalances() {
                     </div>
                   </div>
                   <div className='flex items-center justify-between lg:justify-start gap-4'>
-                    <span className='text-sm font-medium text-green-600 bg-green-50 px-3 py-1 rounded-full'>
-                      {stats.totalBalanceAmount > 0 
-                        ? ((data.totalOutstanding / stats.totalBalanceAmount) * 100).toFixed(1) 
-                        : '0'}% of total
-                    </span>
                     {expandedGrades[grade] ? (
                       <ChevronUp className='w-5 h-5 text-gray-500' />
                     ) : (
@@ -688,15 +673,9 @@ export default function OutstandingBalances() {
       {Object.keys(filteredStudents).length > 0 && (
         <Card className='mt-6 bg-gray-50'>
           <CardContent className='p-4'>
-            <div className='flex flex-col md:flex-row justify-between md:items-center gap-4'>
+            <div className='flex flex-col md:flex-row md:items-center gap-4'>
               <div className='text-sm text-gray-600'>
                 Showing {Object.values(filteredStudents).reduce((acc, data) => acc + data.students.length, 0)} students across {Object.keys(filteredStudents).length} grades
-              </div>
-              <div className='flex gap-6'>
-                <div>
-                  <span className='text-sm font-medium text-gray-600'>Total Outstanding: </span>
-                  <span className='text-lg font-bold text-green-600'>₦{stats.totalBalanceAmount.toLocaleString()}</span>
-                </div>
               </div>
             </div>
           </CardContent>
