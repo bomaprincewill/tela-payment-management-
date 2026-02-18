@@ -122,7 +122,7 @@ const feeItemsConfig = [
   { id: 'extraCurriculum', label: 'Extra Curriculum Activities' },
   { id: 'developmentLevy', label: 'Development Levy' },
   { id: 'ptaLevyNew', label: 'P.T.A Levy (New Intake)' },
-  { id: 'registrationForm', label: 'Registration Form (Per Family)' },  
+  { id: 'registrationForm', label: 'Registration Form' },  
   { id: 'schoolUniform', label: 'School Uniform (2 Pairs)' },
   { id: 'peOutfit', label: 'P.E Outfit' },
   { id: 'stockings', label: 'Stockings (2 Pairs)' },  
@@ -1868,6 +1868,7 @@ export default function FeeBreakdown() {
 }
 
 // ================ COMPONENT ENDS HERE ================
+
 
 
 
