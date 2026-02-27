@@ -5,8 +5,8 @@ import "./globals.css";
 // Configure the font. Subsets are required for optimization.
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-
   display: 'swap',
+  variable: '--font-plus-jakarta-sans',
 });
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-       className={plusJakarta.className}
+       className={`${plusJakarta.className} font-sans`}
       >
         {children}
       </body>
