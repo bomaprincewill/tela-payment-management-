@@ -5,6 +5,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { Select } from '@/components/ui/select'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@supabase/supabase-js'
@@ -174,7 +175,10 @@ export default function OutstandingBalances() {
       let totalBalanceAmount = 0
 
       receipts.forEach((receipt: Receipt) => {
-        const studentKey = receipt.admission_number
+        const firstName = receipt.student_name?.split(' ')[0]?.trim().toLowerCase() || 'unknown-student'
+        const parentIdentifier = receipt.parent_name?.trim().toLowerCase() || 'unknown-parent'
+        const gradeIdentifier = receipt.grade?.trim().toLowerCase() || 'unknown-grade'
+        const studentKey = `${firstName}-${gradeIdentifier}-${parentIdentifier}`
         
         if (!studentMap.has(studentKey)) {
           studentMap.set(studentKey, {
@@ -496,23 +500,23 @@ export default function OutstandingBalances() {
               <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
               <Input
                 type='text'
-                placeholder='Search by student name, admission number, or parent name...'
+                placeholder='Search by student name, parent/guardian contact, or parent name...'
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className='pl-10'
               />
             </div>
             <div className='flex flex-wrap gap-2'>
-              <select
+              <Select
                 value={filterGrade}
                 onChange={(e) => setFilterGrade(e.target.value)}
-                className='px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 min-w-[150px] w-full sm:w-auto'
+                className='min-w-[150px]'
               >
                 <option value='all'>All Grades</option>
                 {gradeOptions.map(grade => (
                   <option key={grade} value={grade}>{grade}</option>
                 ))}
-              </select>
+              </Select>
               <Button
                 onClick={fetchOutstandingBalances}
                 variant='outline'
@@ -605,7 +609,7 @@ export default function OutstandingBalances() {
                           <div>
                             <h3 className='font-semibold text-gray-800'>{student.studentName}</h3>
                             <p className='text-sm text-gray-600'>
-                              Adm: {student.admissionNumber} • Parent: {student.parentName}
+                              Contact: {student.admissionNumber} • Parent: {student.parentName}
                             </p>
                           </div>
                           <div className='text-right'>

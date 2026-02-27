@@ -4,6 +4,7 @@
 import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
+import { Select } from '@/components/ui/select'
 import { gradeOptions, termOptions, FormData } from './index'
 
 interface StudentInfoFormProps {
@@ -47,42 +48,42 @@ export default function StudentInfoForm({
               <p className='text-green-500 text-xs mt-1'>{validationErrors.studentName}</p>
             )}
           </div>
-          <div>
-            <h1 className='text-sm font-medium mb-2'>Grade</h1>
-            <select
-              id='grade'
-              value={formData.grade}
-              onChange={onInputChange}
-              className={`w-full px-3 py-2 border ${validationErrors.grade ? 'border-green-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-green-500`}
-            >
-              <option value=''>Select Grade</option>
-              {gradeOptions.map(grade => (
-                <option key={grade} value={grade}>
-                  {grade}
-                </option>
-              ))}
-            </select>
-            {validationErrors.grade && (
-              <p className='text-green-500 text-xs mt-1'>{validationErrors.grade}</p>
-            )}
-          </div>
-          <div>
-            <h1 className='text-sm font-medium mb-2'>Term</h1>
-            <select
-              id='term'
-              value={formData.term}
-              onChange={onInputChange}
-              className={`w-full px-3 py-2 border ${validationErrors.term ? 'border-green-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-green-500`}
-            >
-              <option value=''>Select Term</option>
-              {termOptions.map(term => (
-                <option key={term} value={term}>
-                  {term}
-                </option>
-              ))}
-            </select>
-            {validationErrors.term && (
-              <p className='text-green-500 text-xs mt-1'>{validationErrors.term}</p>
+            <div>
+              <h1 className='text-sm font-medium mb-2'>Grade</h1>
+              <Select
+                id='grade'
+                value={formData.grade}
+                onChange={onInputChange}
+                className={validationErrors.grade ? 'border-green-500' : ''}
+              >
+                <option value=''>Select Grade</option>
+                {gradeOptions.map(grade => (
+                  <option key={grade} value={grade}>
+                    {grade}
+                  </option>
+                ))}
+              </Select>
+              {validationErrors.grade && (
+                <p className='text-green-500 text-xs mt-1'>{validationErrors.grade}</p>
+              )}
+            </div>
+            <div>
+              <h1 className='text-sm font-medium mb-2'>Term</h1>
+              <Select
+                id='term'
+                value={formData.term}
+                onChange={onInputChange}
+                className={validationErrors.term ? 'border-green-500' : ''}
+              >
+                <option value=''>Select Term</option>
+                {termOptions.map(term => (
+                  <option key={term} value={term}>
+                    {term}
+                  </option>
+                ))}
+              </Select>
+              {validationErrors.term && (
+                <p className='text-green-500 text-xs mt-1'>{validationErrors.term}</p>
             )}
           </div>
           <div>

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@supabase/supabase-js'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Select } from '@/components/ui/select'
 import { RefreshCw, Home, Users, LogOut } from 'lucide-react'
 import { gradeOptions } from './fee-breakdown/index'
 
@@ -114,8 +115,17 @@ const PaidReceipts = () => {
       }
 
       const filteredReceipts = (data || []).filter(receipt => {
-        const payments = receipt.balance_payments
-        return !Array.isArray(payments) || payments.length === 0
+        const payments = Array.isArray(receipt.balance_payments)
+          ? receipt.balance_payments
+          : []
+
+        const hasBalanceEntries = payments.length > 0
+        const balanceTotal =
+          typeof receipt.balance_total === 'number'
+            ? receipt.balance_total
+            : parseFloat(`${receipt.balance_total}`) || 0
+
+        return !hasBalanceEntries && balanceTotal <= 0
       })
 
       setReceipts(filteredReceipts as Receipt[])
@@ -230,11 +240,11 @@ const PaidReceipts = () => {
         <label className='text-sm font-medium text-gray-700' htmlFor='grade-filter'>
           Filter by grade
         </label>
-        <select
+        <Select
           id='grade-filter'
-          className='border border-gray-200 rounded-md px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-green-500 flex-1 min-w-[200px]'
           value={selectedGrade}
           onChange={event => setSelectedGrade(event.target.value)}
+          className='min-w-[200px]'
         >
           <option value=''>All grades</option>
           {gradeOptions.map(grade => (
@@ -242,7 +252,7 @@ const PaidReceipts = () => {
               {grade}
             </option>
           ))}
-        </select>
+        </Select>
       </div>
 
       <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6'>

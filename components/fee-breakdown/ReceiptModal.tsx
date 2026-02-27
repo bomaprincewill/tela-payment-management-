@@ -4,6 +4,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import { Select } from '@/components/ui/select'
 import Logo from '@/public/celiaslogo.png'
 import { X, Download, Edit, Trash2, RotateCcw } from 'lucide-react'
 import { Receipt } from './index'
@@ -215,15 +216,15 @@ export default function ReceiptModal({
               <label htmlFor='modalFormat' className='text-sm font-medium text-gray-700'>
                 Download as:
               </label>
-              <select
-                id='modalFormat'
-                value={downloadFormat}
-                onChange={(e) => onDownloadFormatChange(e.target.value)}
-                className='px-2 py-1 border border-gray-300 rounded-md text-sm bg-white'
-              >
-                <option value='pdf'>PDF</option>
-                <option value='jpeg'>JPEG</option>
-              </select>
+                  <Select
+                    id='modalFormat'
+                    value={downloadFormat}
+                    onChange={(e) => onDownloadFormatChange(e.target.value)}
+                    className='w-auto px-2 py-1 text-sm'
+                  >
+                    <option value='pdf'>PDF</option>
+                    <option value='jpeg'>JPEG</option>
+                  </Select>
             </div>
             <Button
               onClick={onDownload}

@@ -5,6 +5,7 @@ import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { Select } from '@/components/ui/select'
 import { RotateCcw, PlusCircle, MinusCircle, X } from 'lucide-react'
 import { BalancePayment } from './index'
 
@@ -85,10 +86,9 @@ export default function BalancePaymentsSection({
             <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
               <div>
                 <label className='text-sm font-medium mb-2 block'>Select Fee Item</label>
-                <select
+                <Select
                   value={selectedBalanceItem}
                   onChange={(e) => onSelectedBalanceItemChange(e.target.value)}
-                  className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
                 >
                   <option value=''>Select an item...</option>
                   {availableFeeItems.map((item) => (
@@ -96,7 +96,7 @@ export default function BalancePaymentsSection({
                       {item.label}
                     </option>
                   ))}
-                </select>
+                </Select>
               </div>
               <div>
                 <label className='text-sm font-medium mb-2 block'>Amount (₦)</label>

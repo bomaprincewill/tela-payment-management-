@@ -4,6 +4,7 @@
 import React from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Select } from '@/components/ui/select'
 import Image from 'next/image'
 import Logo from '@/public/celiaslogo.png'
 import { Download, RotateCcw } from 'lucide-react'
@@ -195,19 +196,19 @@ export default function ReceiptPreview({
 
         {/* Download Options */}
         <div className='mt-6 flex flex-col sm:flex-row sm:justify-end gap-3 print:hidden'>
-          <div className='flex items-center gap-2'>
-            <label htmlFor='format' className='text-sm font-medium'>Download as:</label>
-            <select
-              id='format'
-              value={downloadFormat}
-              onChange={(e) => onDownloadFormatChange(e.target.value)}
-              className='px-2 py-1 border border-gray-300 rounded-md text-sm'
-              disabled={isSaving}
-            >
-              <option value='pdf'>PDF</option>
-              <option value='jpeg'>JPEG</option>
-            </select>
-          </div>
+            <div className='flex items-center gap-2'>
+              <label htmlFor='format' className='text-sm font-medium'>Download as:</label>
+              <Select
+                id='format'
+                value={downloadFormat}
+                onChange={(e) => onDownloadFormatChange(e.target.value)}
+                className='w-auto px-2 py-1 text-sm'
+                disabled={isSaving}
+              >
+                <option value='pdf'>PDF</option>
+                <option value='jpeg'>JPEG</option>
+              </Select>
+            </div>
           <Button
             onClick={onDownload}
             className='bg-green-600 hover:bg-green-700 w-full sm:w-auto'

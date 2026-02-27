@@ -5,6 +5,7 @@ import React, { useMemo, useState, useRef, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
+import { Select } from '@/components/ui/select'
 import Logo from '@/public/celiaslogo.png'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -1119,11 +1120,11 @@ export default function FeeBreakdown() {
             </div>
             <div>
               <h1 className='text-sm font-medium mb-2'>Grade</h1>
-              <select
+              <Select
                 id='grade'
                 value={formData.grade}
                 onChange={handleInputChange}
-                className={`w-full px-3 py-2 border ${validationErrors.grade ? 'border-green-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-green-500`}
+                className={validationErrors.grade ? 'border-green-500' : ''}
               >
                 <option value=''>Select Grade</option>
                 {gradeOptions.map(grade => (
@@ -1131,18 +1132,18 @@ export default function FeeBreakdown() {
                     {grade}
                   </option>
                 ))}
-              </select>
+              </Select>
               {validationErrors.grade && (
                 <p className='text-green-500 text-xs mt-1'>{validationErrors.grade}</p>
               )}
             </div>
             <div>
               <h1 className='text-sm font-medium mb-2'>Term</h1>
-              <select
+              <Select
                 id='term'
                 value={formData.term}
                 onChange={handleInputChange}
-                className={`w-full px-3 py-2 border ${validationErrors.term ? 'border-green-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-green-500`}
+                className={validationErrors.term ? 'border-green-500' : ''}
               >
                 <option value=''>Select Term</option>
                 {termOptions.map(term => (
@@ -1150,7 +1151,7 @@ export default function FeeBreakdown() {
                     {term}
                   </option>
                 ))}
-              </select>
+              </Select>
               {validationErrors.term && (
                 <p className='text-green-500 text-xs mt-1'>{validationErrors.term}</p>
               )}
@@ -1261,10 +1262,9 @@ export default function FeeBreakdown() {
               <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 <div>
                   <label className='text-sm font-medium mb-2 block'>Select Fee Item</label>
-                  <select
+                  <Select
                     value={selectedBalanceItem}
                     onChange={(e) => setSelectedBalanceItem(e.target.value)}
-                    className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500'
                   >
                     <option value=''>Select an item...</option>
                     {availableFeeItems.map((item) => (
@@ -1272,7 +1272,7 @@ export default function FeeBreakdown() {
                         {item.label}
                       </option>
                     ))}
-                  </select>
+                  </Select>
                 </div>
                 <div>
                   <label className='text-sm font-medium mb-2 block'>Amount (₦)</label>
@@ -1560,16 +1560,16 @@ export default function FeeBreakdown() {
             <div className='mt-6 flex justify-end gap-4 print:hidden'>
               <div className='flex items-center gap-2'>
                 <label htmlFor='format' className='text-sm font-medium'>Download as:</label>
-                <select
+                <Select
                   id='format'
                   value={downloadFormat}
                   onChange={(e) => setDownloadFormat(e.target.value)}
-                  className='px-2 py-1 border border-gray-300 rounded-md text-sm'
+                  className='w-auto px-2 py-1 text-sm'
                   disabled={isSaving}
                 >
                   <option value='pdf'>PDF</option>
                   <option value='jpeg'>JPEG</option>
-                </select>
+                </Select>
               </div>
               <Button
                 onClick={handleDownload}
@@ -1764,15 +1764,15 @@ export default function FeeBreakdown() {
                   <label htmlFor='modalFormat' className='text-sm font-medium text-gray-700'>
                     Download as:
                   </label>
-                  <select
+                  <Select
                     id='modalFormat'
                     value={modalDownloadFormat}
                     onChange={(e) => setModalDownloadFormat(e.target.value)}
-                    className='px-2 py-1 border border-gray-300 rounded-md text-sm bg-white'
+                    className='w-auto px-2 py-1 text-sm'
                   >
                     <option value='pdf'>PDF</option>
                     <option value='jpeg'>JPEG</option>
-                  </select>
+                  </Select>
                 </div>
                 <Button
                   onClick={handleModalDownload}
