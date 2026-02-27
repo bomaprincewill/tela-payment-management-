@@ -168,13 +168,17 @@ const PaidReceipts = () => {
   }
 
   return (
-    <div className='max-w-6xl mx-auto px-4 py-6 sm:py-8'>
-      <Card className='mb-6'>
-        <CardContent className='flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4'>
+    <div
+      className='bg-gray-50 min-h-screen'
+      style={{ fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif' }}
+    >
+      <div className='max-w-6xl mx-auto px-4 py-6 sm:py-8'>
+      <div className='mb-6'>
+        <div className='flex items-start justify-between gap-4 flex-col sm:flex-row'>
           <div>
-            <h1 className='text-2xl font-semibold text-gray-800'>Paid Receipts</h1>
-            <p className='text-sm text-gray-500'>
-              Receipts that have been fully paid with no outstanding balance entries.
+            <h1 className='text-3xl font-bold text-gray-800'>Paid Receipts</h1>
+            <p className='text-gray-600'>
+              All receipts that have been fully settled—no outstanding balance entries remain.
             </p>
           </div>
           <div className='flex flex-col sm:flex-row gap-2 w-full sm:w-auto'>
@@ -189,8 +193,8 @@ const PaidReceipts = () => {
               {refreshing ? 'Refreshing...' : 'Refresh'}
             </Button>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       <div className='flex flex-wrap gap-2 mb-4'>
         <Button
@@ -241,29 +245,46 @@ const PaidReceipts = () => {
         </select>
       </div>
 
-      <div className='grid grid-cols-1 gap-4 sm:grid-cols-3 mb-6'>
-        <div className='rounded-lg bg-white border border-gray-100 p-4 flex flex-col'>
-          <span className='text-xs uppercase tracking-wide text-gray-500'>Displayed Receipts</span>
-          <span className='text-2xl font-semibold text-gray-900'>{filteredReceipts.length}</span>
-          <span className='text-xs text-gray-400'>
-            Showing {filteredReceipts.length} of {receipts.length}
-          </span>
-        </div>
-        <div className='rounded-lg bg-white border border-gray-100 p-4 flex flex-col'>
-          <span className='text-xs uppercase tracking-wide text-gray-500'>Total Amount</span>
-          <span className='text-2xl font-semibold text-gray-900'>{formatCurrency(totalAmount)}</span>
-        </div>
-        <div className='rounded-lg bg-white border border-gray-100 p-4 flex flex-col'>
-          <span className='text-xs uppercase tracking-wide text-gray-500'>Last updated</span>
-          <span className='text-sm text-gray-700'>
-            {new Date().toLocaleString('en-NG', {
-              hour: '2-digit',
-              minute: '2-digit',
-              month: 'short',
-              day: '2-digit'
-            })}
-          </span>
-        </div>
+      <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6'>
+        <Card className='bg-green-50 border-green-200'>
+          <CardContent className='p-6'>
+            <div className='flex items-center justify-between'>
+              <div>
+                <p className='text-sm font-medium text-green-600 mb-1'>Displayed Receipts</p>
+                <p className='text-3xl font-bold text-green-700'>{filteredReceipts.length}</p>
+                <p className='text-xs text-green-500'>of {receipts.length} total</p>
+              </div>
+              <Users className='w-12 h-12 text-green-400' />
+            </div>
+          </CardContent>
+        </Card>
+        <Card className='bg-green-50 border-green-200'>
+          <CardContent className='p-6'>
+            <div className='flex items-center justify-between'>
+              <div>
+                <p className='text-sm font-medium text-green-600 mb-1'>Total Amount</p>
+                <p className='text-3xl font-bold text-green-700'>{formatCurrency(totalAmount)}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className='bg-green-50 border-green-200'>
+          <CardContent className='p-6'>
+            <div className='flex items-center justify-between'>
+              <div>
+                <p className='text-sm font-medium text-green-600 mb-1'>Last updated</p>
+                <p className='text-sm text-green-700'>
+                  {new Date().toLocaleString('en-NG', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    month: 'short',
+                    day: '2-digit'
+                  })}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <Card className='bg-white border border-gray-100 shadow-sm'>
@@ -316,7 +337,8 @@ const PaidReceipts = () => {
         </CardContent>
       </Card>
     </div>
-  )
+  </div>
+)
 }
 
 export default PaidReceipts

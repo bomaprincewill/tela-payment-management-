@@ -415,7 +415,11 @@ export default function OutstandingBalances() {
   }
 
   return (
-    <div className='max-w-6xl mx-auto px-4 py-6 sm:py-8'>
+    <div
+      className='bg-gray-50 min-h-screen'
+      style={{ fontFamily: '"Plus Jakarta Sans", system-ui, sans-serif' }}
+    >
+      <div className='max-w-6xl mx-auto px-4 py-6 sm:py-8'>
       {/* Navigation Header */}
       <div className='mb-6 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3'>
         <div className='flex flex-wrap items-center gap-3 sm:gap-4'>
@@ -704,6 +708,7 @@ export default function OutstandingBalances() {
           </CardContent>
         </Card>
       )}
+      </div>
     </div>
   )
 }
