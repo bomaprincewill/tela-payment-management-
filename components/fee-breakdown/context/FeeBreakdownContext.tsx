@@ -4,17 +4,17 @@
 import React, { createContext, useContext, useState, useMemo, useRef, useEffect } from 'react'
 import html2canvas from 'html2canvas-pro'
 import jsPDF from 'jspdf'
-import { 
-  FormData, 
-  BalancePayment, 
-  Receipt, 
+import {
+  FormData,
+  BalancePayment,
+  Receipt,
   FeeItem,
   feeItemsConfig
 } from '../index'
-import { 
-  generateReceiptNumber, 
-  calculateGrandTotal, 
-  calculateBalanceTotal, 
+import {
+  generateReceiptNumber,
+  calculateGrandTotal,
+  calculateBalanceTotal,
   validateForm,
   saveToSupabase,
   updateReceiptInSupabase,
@@ -23,6 +23,26 @@ import {
   downloadAsPDF,
   downloadAsJPEG
 } from '../utils/receiptUtils'
+
+const sanitizeForFilename = (value?: string): string => {
+  if (!value) return ''
+  return value
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-zA-Z0-9-]/g, '')
+}
+
+const buildReceiptFilename = (
+  studentName?: string,
+  grade?: string,
+  receiptNumber?: string
+): string => {
+  const namePart = sanitizeForFilename(studentName) || 'student'
+  const gradePart = sanitizeForFilename(grade) || 'grade'
+  const receiptPart = sanitizeForFilename(receiptNumber)
+  const suffix = receiptPart ? `-${receiptPart}` : ''
+  return `receipt-${namePart}-${gradePart}${suffix}`
+}
 
 interface FeeBreakdownContextType {
   // State
@@ -355,7 +375,8 @@ export const FeeBreakdownProvider: React.FC<{ children: React.ReactNode }> = ({ 
       return
     }
 
-    const filename = `receipt-${receiptNumber || new Date().toISOString().split('T')[0]}`
+    const fallbackId = receiptNumber || new Date().toISOString().split('T')[0]
+    const filename = buildReceiptFilename(formData.studentName, formData.grade, fallbackId)
 
     try {
       if (downloadFormat === 'pdf') {
@@ -579,7 +600,8 @@ export const FeeBreakdownProvider: React.FC<{ children: React.ReactNode }> = ({ 
     }
 
     setIsModalDownloading(true)
-    const filename = `receipt-${modalReceipt.receipt_number}`
+    const modalReceiptId = modalReceipt.receipt_number || modalReceipt.id?.toString()
+    const filename = buildReceiptFilename(modalReceipt.student_name, modalReceipt.grade, modalReceiptId)
 
     try {
       if (modalDownloadFormat === 'pdf') {

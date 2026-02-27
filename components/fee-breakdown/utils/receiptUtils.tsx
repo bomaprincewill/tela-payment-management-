@@ -119,7 +119,7 @@ export const validateForm = (
     errors.term = 'Term is required'
   }
   if (!formData.admissionNumber?.trim()) {
-    errors.admissionNumber = 'Admission number is required'
+    errors.admissionNumber = 'Parent/Guardian contact is required'
   }
   if (!formData.parentName?.trim()) {
     errors.parentName = 'Parent/Guardian name is required'

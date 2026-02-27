@@ -86,11 +86,11 @@ export default function StudentInfoForm({
             )}
           </div>
           <div>
-            <h1 className='text-sm font-medium mb-2'>Admission Number</h1>
+            <h1 className='text-sm font-medium mb-2'>Parent/Guardian Contact</h1>
             <Input
               id='admissionNumber'
               type='text'
-              placeholder='Enter Admission Number'
+              placeholder='Enter Parent/Guardian contact'
               className={`placeholder:text-gray-400 ${validationErrors.admissionNumber ? 'border-green-500' : ''}`}
               value={formData.admissionNumber}
               onChange={onInputChange}

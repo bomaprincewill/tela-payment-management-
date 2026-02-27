@@ -83,22 +83,23 @@ export interface FormData {
 }
 
 export const gradeOptions = [
+  'Angel',
   'Rainbow',
   'Glorious Star',
   'Bright Star',
   'Lavender',
-  'Grade 1',
-  'Grade 2',
-  'Grade 3',
-  'Grade 4',
-  'Grade 5',
-  'Grade 6',
-  'JSS 1',
-  'JSS 2',
-  'JSS 3',
-  'SS 1',
-  'SS 2',
-  'SS 3'
+  'Year 1',
+  'Year 2',
+  'Year 3',
+  'Year 4',
+  'Year 5',
+  'Year 6',
+  'Year 7',
+  'Year 8',
+  'Year 9',
+  'Year 10',
+  'Year 11',
+  'Year 12'
 ]
 
 export const termOptions = ['1st Term', '2nd Term', '3rd Term']

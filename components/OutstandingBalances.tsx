@@ -1,7 +1,7 @@
 // components/OutstandingBalances.tsx
 // ================ COMPONENT STARTS HERE ================
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -123,26 +123,27 @@ export default function OutstandingBalances() {
 
   // Grade options for filter
   const gradeOptions: string[] = [
-    'Rainbow',
-    'Glorious Star',
-    'Bright Star',
-    'Lavender',
-    'Grade 1',
-    'Grade 2',
-    'Grade 3',
-    'Grade 4',
-    'Grade 5',
-    'Grade 6',
-    'JSS 1',
-    'JSS 2',
-    'JSS 3',
-    'SS 1',
-    'SS 2',
-    'SS 3'
-  ]
+  'Angel',
+  'Rainbow',
+  'Glorious Star',
+  'Bright Star',
+  'Lavender',
+  'Year 1',
+  'Year 2',
+  'Year 3',
+  'Year 4',
+  'Year 5',
+  'Year 6',
+  'Year 7',
+  'Year 8',
+  'Year 9',
+  'Year 10',
+  'Year 11',
+  'Year 12'
+]
 
   // Fetch all receipts and calculate outstanding balances
-  const fetchOutstandingBalances = async (): Promise<void> => {
+  const fetchOutstandingBalances = useCallback(async (): Promise<void> => {
     const parseAmount = (value: string | number | null | undefined): number => {
       if (typeof value === 'number') return Number.isFinite(value) ? value : 0
       if (typeof value !== 'string') return 0
@@ -199,13 +200,18 @@ export default function OutstandingBalances() {
 
         const feeItems = receipt.fee_items || []
         const balancePayments = receipt.balance_payments || []
+        const hasBalancePayment = balancePayments.some((payment: BalancePayment) => parseAmount(payment.amount) > 0)
+
+        if (!hasBalancePayment) {
+          return
+        }
         
         const paymentsByItem: Record<string, number> = {}
         balancePayments.forEach((payment: BalancePayment) => {
           if (!paymentsByItem[payment.itemId]) {
             paymentsByItem[payment.itemId] = 0
           }
-          paymentsByItem[payment.itemId] += parseFloat(payment.amount)
+          paymentsByItem[payment.itemId] += parseAmount(payment.amount)
         })
 
         let hasComputedOutstandingFromFeeItems = false
@@ -297,11 +303,28 @@ export default function OutstandingBalances() {
       setLoading(false)
       setRefreshing(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
     fetchOutstandingBalances()
-  }, [])
+  }, [fetchOutstandingBalances])
+
+  useEffect(() => {
+    const channel = supabase
+      .channel('outstanding-balances-receipts')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'receipts' },
+        () => {
+          fetchOutstandingBalances()
+        }
+      )
+      .subscribe()
+
+    return () => {
+      void supabase.removeChannel(channel)
+    }
+  }, [fetchOutstandingBalances])
 
   const toggleGrade = (grade: string): void => {
     setExpandedGrades(prev => ({
@@ -360,7 +383,7 @@ export default function OutstandingBalances() {
 
   const exportToCSV = (): void => {
     const filtered = getFilteredStudents()
-    let csv = 'Grade,Student Name,Admission Number,Parent Name,Item Description,Term,Original Amount (₦),Paid Amount (₦),Outstanding (₦),Receipt Number,Date\n'
+    let csv = 'Grade,Student Name,Parent/Guardian Contact,Parent Name,Item Description,Term,Original Amount (₦),Paid Amount (₦),Outstanding (₦),Receipt Number,Date\n'
 
     Object.entries(filtered).forEach(([grade, data]) => {
       data.students.forEach(student => {

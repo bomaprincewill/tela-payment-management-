@@ -32,7 +32,7 @@ export default function NavigationHeader() {
           <FileText className='w-6 h-6 text-green-600' />
         </div>
         <div>
-          <h1 className='text-lg sm:text-xl font-bold text-gray-800'>Tela - Payment Management</h1>
+          <h1 className='text-lg sm:text-xl font-bold text-gray-800'>Tela - PM</h1>
           <p className='text-sm text-gray-500'>Create and manage payment receipts</p>
         </div>
       </div>
@@ -40,8 +40,17 @@ export default function NavigationHeader() {
         <Link href='/outstanding-balances'>
           <Button className='bg-green-600 hover:bg-green-700 text-white flex items-center gap-2 w-full sm:w-auto'>
             <Users className='w-4 h-4' />
-            View Outstanding Balances
+            Outstanding Receipts
             <BarChart3 className='w-4 h-4 ml-1' />
+          </Button>
+        </Link>
+        <Link href='/paid-receipts'>
+          <Button
+            variant='outline'
+            className='border-green-200 text-green-700 hover:bg-green-50 w-full sm:w-auto flex items-center gap-2'
+          >
+            <FileText className='w-4 h-4' />
+            Paid Receipts
           </Button>
         </Link>
         <Button

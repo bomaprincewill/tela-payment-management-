@@ -114,7 +114,7 @@ export default function ReceiptModal({
                   <p className='font-semibold'>{receipt.student_name}</p>
                 </div>
                 <div>
-                  <p className='text-xs text-gray-500 uppercase'>Admission No.</p>
+                  <p className='text-xs text-gray-500 uppercase'>Parent/Guardian Contact</p>
                   <p className='font-semibold'>{receipt.admission_number}</p>
                 </div>
                 <div>

@@ -98,7 +98,7 @@ export default function ReceiptPreview({
                 <p className='font-semibold'>{formData.studentName || ''}</p>
               </div>
               <div>
-                <p className='text-xs text-gray-500 uppercase'>Admission No.</p>
+                <p className='text-xs text-gray-500 uppercase'>Parent/Guardian Contact</p>
                 <p className='font-semibold'>{formData.admissionNumber || ''}</p>
               </div>
               <div>

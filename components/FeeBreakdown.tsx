@@ -95,22 +95,23 @@ interface FormData {
 // ================ CONSTANTS ================
 
 const gradeOptions = [
+  'Angel',
   'Rainbow',
   'Glorious Star',
   'Bright Star',
   'Lavender',
-  'Grade 1',
-  'Grade 2',
-  'Grade 3',
-  'Grade 4',
-  'Grade 5',
-  'Grade 6',
-  'JSS 1',
-  'JSS 2',
-  'JSS 3',
-  'SS 1',
-  'SS 2',
-  'SS 3'
+  'Year 1',
+  'Year 2',
+  'Year 3',
+  'Year 4',
+  'Year 5',
+  'Year 6',
+  'Year 7',
+  'Year 8',
+  'Year 9',
+  'Year 10',
+  'Year 11',
+  'Year 12'
 ]
 
 const termOptions = ['1st Term', '2nd Term', '3rd Term']
@@ -278,7 +279,7 @@ export default function FeeBreakdown() {
       errors.term = 'Term is required'
     }
     if (!formData.admissionNumber?.trim()) {
-      errors.admissionNumber = 'Admission number is required'
+      errors.admissionNumber = 'Parent/Guardian contact is required'
     }
     if (!formData.parentName?.trim()) {
       errors.parentName = 'Parent/Guardian name is required'
@@ -1155,11 +1156,11 @@ export default function FeeBreakdown() {
               )}
             </div>
             <div>
-              <h1 className='text-sm font-medium mb-2'>Admission Number</h1>
+              <h1 className='text-sm font-medium mb-2'>Parent/Guardian Contact</h1>
               <Input
                 id='admissionNumber'
                 type='text'
-                placeholder='Enter Admission Number'
+                placeholder='Enter Parent/Guardian contact'
                 className={`placeholder:text-gray-400 ${validationErrors.admissionNumber ? 'border-green-500' : ''}`}
                 value={formData.admissionNumber}
                 onChange={handleInputChange}
@@ -1464,7 +1465,7 @@ export default function FeeBreakdown() {
                     <p className='font-semibold'>{formData.studentName || ''}</p>
                   </div>
                   <div>
-                    <p className='text-xs text-gray-500 uppercase'>Admission No.</p>
+                    <p className='text-xs text-gray-500 uppercase'>Parent/Guardian Contact</p>
                     <p className='font-semibold'>{formData.admissionNumber || ''}</p>
                   </div>
                   <div>
@@ -1666,7 +1667,7 @@ export default function FeeBreakdown() {
                       <p className='font-semibold'>{modalReceipt.student_name}</p>
                     </div>
                     <div>
-                      <p className='text-xs text-gray-500 uppercase'>Admission No.</p>
+                      <p className='text-xs text-gray-500 uppercase'>Parent/Guardian Contact</p>
                       <p className='font-semibold'>{modalReceipt.admission_number}</p>
                     </div>
                     <div>
